@@ -9,8 +9,6 @@ import adriangarciao.ai_job_app_assistant.model.User;
 import adriangarciao.ai_job_app_assistant.repository.ResumeRepository;
 import adriangarciao.ai_job_app_assistant.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
-
-    private static final Logger log = LoggerFactory.getLogger(ResumeService.class);
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ContentDisposition;

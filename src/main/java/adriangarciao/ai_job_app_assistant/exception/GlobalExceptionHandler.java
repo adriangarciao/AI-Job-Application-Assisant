@@ -1,25 +1,4 @@
-        @ExceptionHandler(ResumeNotFoundException.class)
-        @ResponseStatus(HttpStatus.NOT_FOUND)
-        public ApiError handleResumeNotFound(ResumeNotFoundException ex) {
-            return new ApiError(404, "Not Found", ex.getMessage(), Instant.now());
-        }
-
-        @ExceptionHandler(EmailAlreadyUsedException.class)
-        @ResponseStatus(HttpStatus.CONFLICT)
-        public ApiError handleEmailAlreadyUsed(EmailAlreadyUsedException ex) {
-            return new ApiError(409, "Conflict", ex.getMessage(), Instant.now());
-        }
-    @ExceptionHandler(ResumeNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ApiError handleResumeNotFound(ResumeNotFoundException ex) {
-        return new ApiError(404, "Not Found", ex.getMessage(), Instant.now());
-    }
-
-    @ExceptionHandler(EmailAlreadyUsedException.class)
-    @ResponseStatus(HttpStatus.CONFLICT)
-    public ApiError handleEmailAlreadyUsed(EmailAlreadyUsedException ex) {
-        return new ApiError(409, "Conflict", ex.getMessage(), Instant.now());
-    }
+// ...existing code...
 package adriangarciao.ai_job_app_assistant.exception;
 
 import jakarta.validation.ConstraintViolationException;
