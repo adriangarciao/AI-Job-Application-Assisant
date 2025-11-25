@@ -1,4 +1,4 @@
-﻿package adriangarciao.ai_job_app_assistant.service.ai;
+package adriangarciao.ai_job_app_assistant.service.ai;
 import adriangarciao.ai_job_app_assistant.dto.*;
 import adriangarciao.ai_job_app_assistant.service.ai.llm.LLMService;
 import org.slf4j.Logger;
