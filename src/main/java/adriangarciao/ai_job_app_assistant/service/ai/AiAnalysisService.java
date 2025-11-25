@@ -1,4 +1,4 @@
-package adriangarciao.ai_job_app_assistant.service.ai;
+﻿package adriangarciao.ai_job_app_assistant.service.ai;
 
 import adriangarciao.ai_job_app_assistant.dto.FeedbackDTO;
 import adriangarciao.ai_job_app_assistant.dto.ParsedJobDTO;
@@ -39,7 +39,7 @@ public class AiAnalysisService {
         boolean includeCoverLetter = request.includeCoverLetter();
 
         log.debug("Analyzing resume (len={}) against job (len={}), includeCoverLetter={}",
-                parsedResume.raw().length(), parsedJob.raw().length(), includeCoverLetter);
+                parsedResume.rawText().length(), parsedJob.rawText().length(), includeCoverLetter);
 
         return llmService.generateFeedback(parsedResume, parsedJob, includeCoverLetter);
     }
