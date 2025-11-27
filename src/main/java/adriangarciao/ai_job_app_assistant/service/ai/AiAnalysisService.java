@@ -17,15 +17,13 @@ public class AiAnalysisService {
     }
     public FeedbackDTO analyze(SubmitAnalysisRequest request) {
         Objects.requireNonNull(request, "request must not be null");
-        String resumeText = request.resumeText();
-        String jobPostingText = request.jobPostingText();
-        if (resumeText == null) resumeText = "";
-        if (jobPostingText == null) jobPostingText = "";
-        ParsedResumeDTO parsedResume = parserService.parseResume(resumeText);
-        ParsedJobDTO parsedJob = parserService.parseJob(jobPostingText);
-        boolean includeCoverLetter = request.includeCoverLetter();
+        
+        ParsedResumeDTO parsedResume = parserService.parseResume(request.resumeText());
+        ParsedJobDTO parsedJob = parserService.parseJob(request.jobPostingText());
+        
         log.debug("Analyzing resume (len={}) against job (len={}), includeCoverLetter={}",
-                parsedResume.rawText().length(), parsedJob.rawText().length(), includeCoverLetter);
-        return llmService.generateFeedback(parsedResume, parsedJob, includeCoverLetter);
+                parsedResume.rawText().length(), parsedJob.rawText().length(), request.includeCoverLetter());
+        
+        return llmService.generateFeedback(parsedResume, parsedJob, request.includeCoverLetter());
     }
 }

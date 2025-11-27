@@ -33,10 +33,13 @@ public class SecurityConfig {
                 // Stateless JWT
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
-                // What’s allowed without a token
+                // What's allowed without a token
                 .authorizeHttpRequests(auth -> auth
                         // simplest: open all auth endpoints
                         .requestMatchers("/api/auth/**").permitAll()
+                        
+                        // Allow AI analysis endpoint without auth for demo
+                        .requestMatchers("/api/ai/**").permitAll()
 
                         // admin protected
                         .requestMatchers("/admin/**").hasRole("ADMIN")

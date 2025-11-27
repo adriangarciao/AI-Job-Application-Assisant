@@ -11,7 +11,9 @@ public record FeedbackDTO(
         List<String> strengths,
         List<String> weaknesses,
         List<String> suggestions,
-        String summary
+        String summary,
+        String jobLocation,
+        String compensationInfo
 ) {
     public FeedbackDTO {
         // Normalize lists to non-null immutable lists
@@ -19,5 +21,6 @@ public record FeedbackDTO(
         weaknesses = (weaknesses == null) ? List.of() : List.copyOf(weaknesses);
         suggestions = (suggestions == null) ? List.of() : List.copyOf(suggestions);
         summary = Objects.requireNonNullElse(summary, "");
+        // jobLocation and compensationInfo can be null if not found
     }
 }

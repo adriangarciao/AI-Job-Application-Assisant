@@ -10,6 +10,8 @@ public record ParsedJobDTO(
         String title,
         List<String> requiredSkills,
         List<String> niceToHaveSkills,
+        String jobLocation,
+        String compensationInfo,
         String rawText
 ) {
     public ParsedJobDTO {
@@ -17,5 +19,6 @@ public record ParsedJobDTO(
         niceToHaveSkills = (niceToHaveSkills == null) ? List.of() : List.copyOf(niceToHaveSkills);
         title = Objects.requireNonNullElse(title, "");
         rawText = Objects.requireNonNullElse(rawText, "");
+        // jobLocation and compensationInfo can be null if not found
     }
 }
