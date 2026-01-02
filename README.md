@@ -1,6 +1,6 @@
 # AI Job Application Assistant
 
-![Landing screenshot](images/IMAGE_1.png)
+![Landing screenshot](image.png)
 
 ![CI](https://github.com/adriangarciao/ai-job-assistant/actions/workflows/maven.yml/badge.svg?branch=main)
 
