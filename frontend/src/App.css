@@ -88,7 +88,7 @@ a:hover::after,a:focus::after{width:100%}
 .howto-card{background:var(--off-white);border:1px solid var(--border);padding:var(--space-4);margin-bottom:var(--space-4);border-radius:var(--radius-sm)}
 .howto-steps{display:flex;flex-direction:column;gap:var(--space-2)}
 .howto-step{display:flex;align-items:flex-start;gap:12px;padding:14px 12px;border-left:4px solid rgba(199,34,51,0.08);background:transparent}
-.howto-step .step-num{width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:transparent;color:var(--cta);border:1px solid rgba(197,34,51,0.12);font-weight:700}
+.howto-step .step-num{width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:var(--ruby-red);color:#fff;border:0;font-weight:700;border-radius:2px}
 .howto-step .step-text{color:var(--text)}
 
 @media (max-width:768px){
