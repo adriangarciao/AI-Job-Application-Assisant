@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import Header from './components/Header'
 import FormCard from './components/FormCard'
 import ResultsCard from './components/ResultsCard'
+import HowToUse from './components/HowToUse'
 
 function App() {
   const [resumeText, setResumeText] = useState('')
@@ -55,6 +56,18 @@ function App() {
     }
   }
 
+  useEffect(()=>{
+    // Respect prefers-reduced-motion
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if(prefersReduced){
+      document.body.setAttribute('data-loaded','true')
+      return
+    }
+    // small timeout to allow mount paint before animating
+    const t = setTimeout(()=> document.body.setAttribute('data-loaded','true'), 80)
+    return ()=> clearTimeout(t)
+  },[])
+
   return (
     <div className="app-container">
       <div className="content">
@@ -73,6 +86,8 @@ function App() {
         />
 
         <ResultsCard result={result} />
+
+        <HowToUse />
       </div>
     </div>
   )

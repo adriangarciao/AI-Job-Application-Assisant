@@ -1,15 +1,20 @@
-/* Design tokens — colors, type, spacing */
+/* Design tokens — palette, type, spacing, motion */
 :root{
-  /* Colors */
-  --bg-primary: #FAF9F7;
-  --bg-secondary: #F2F1EE;
-  --text-primary: #111111;
-  --text-secondary: #666666;
-  --text-tertiary: #888888;
-  --border: #E5E5E5;
-  --accent: #30343A; /* charcoal example — use only one accent */
-  /* CTA color for primary actions (used sparingly) */
-  --cta: #b00020; /* deep red */
+  /* Palette (Reds for accents) */
+  --intense-cherry: #c52233;
+  --ruby-red: #a51c30;
+  --brown-red: #a7333f;
+  --burgundy: #74121d;
+
+  /* Neutrals */
+  --white: #ffffff;
+  --off-white: #fbfbfa;
+  --border: #e9e6e5;
+  --text: #111111;
+  --muted: #666666;
+
+  /* CTA maps to intense cherry */
+  --cta: var(--intense-cherry);
   --cta-dark: #8a0018;
 
   /* Typography */
@@ -27,6 +32,12 @@
   --space-4: 32px;
   --space-5: 48px;
 
-  /* Transitions */
-  --motion-fast: 120ms;
+  /* Motion */
+  --dur-fast: 120ms;
+  --dur-medium: 360ms;
+  --dur-long: 700ms;
+  --stagger: 80ms;
+
+  /* Subtle radii */
+  --radius-sm: 4px;
 }
