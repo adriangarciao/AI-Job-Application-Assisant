@@ -56,8 +56,9 @@ body[data-loaded="true"] .content > *:nth-child(3){transition-delay:calc(var(--s
 body[data-loaded="true"] .content > *:nth-child(4){transition-delay:calc(var(--stagger) * 3)}
 
 /* Header underline reveal */
-.title-underline{height:2px;background:var(--intense-cherry);width:0;margin:12px auto 0;transition:width var(--dur-medium) ease}
-body[data-loaded="true"] .title-underline{width:120px}
+.title-wrap{display:inline-block;text-align:left}
+.title-underline{height:3px;background:var(--intense-cherry);width:0;margin:12px 0 0;transition:width var(--dur-medium) ease}
+body[data-loaded="true"] .title-underline{width:100%}
 
 /* Link underline on hover */
 a{position:relative}
@@ -85,11 +86,11 @@ a:hover::after,a:focus::after{width:100%}
 
 /* HowToUse styles */
 .howto-card{background:var(--off-white);border:1px solid var(--border);padding:var(--space-4);margin-bottom:var(--space-4);border-radius:var(--radius-sm)}
-.howto-steps{display:flex;flex-direction:row;gap:var(--space-3);flex-wrap:wrap}
-.howto-step{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid transparent}
+.howto-steps{display:flex;flex-direction:column;gap:var(--space-2)}
+.howto-step{display:flex;align-items:flex-start;gap:12px;padding:14px 12px;border-left:4px solid rgba(199,34,51,0.08);background:transparent}
 .howto-step .step-num{width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:transparent;color:var(--cta);border:1px solid rgba(197,34,51,0.12);font-weight:700}
 .howto-step .step-text{color:var(--text)}
 
 @media (max-width:768px){
-  .howto-steps{flex-direction:column}
+  .howto-steps{gap:12px}
 }
