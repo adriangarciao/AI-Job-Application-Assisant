@@ -25,7 +25,7 @@ function App() {
     setLoading(true)
 
     try {
-      const response = await fetch('http://localhost:8080/api/ai/analyze', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/ai/analyze`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
