@@ -232,7 +232,7 @@ body[data-loaded="true"] .title-underline{
   justify-content:center;
   padding:12px 20px;
   background:linear-gradient(135deg, var(--intense-cherry) 0%, var(--ruby-red) 100%);
-  color:#fff;
+  color:#fff !important;
   font-weight:700;
   border-radius:var(--radius-sm);
   cursor:pointer;

@@ -2,7 +2,6 @@ import React from 'react'
 
 export default function HowToUse(){
   const steps = [
-    'Create an account and complete your profile',
     'Connect or paste your resume',
     'Paste a job posting to analyze',
     'Review strengths, weaknesses and suggestions',
