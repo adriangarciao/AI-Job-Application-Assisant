@@ -126,7 +126,14 @@ export default function FormCard({
       </div>
 
       <div className="form-group">
-        <label htmlFor="job">Job Posting</label>
+        <div className="field-header">
+          <label htmlFor="job">Job Posting</label>
+          {jobPostingText && (
+            <button className="clear-button" onClick={() => setJobPostingText('')} type="button">
+              Clear ✕
+            </button>
+          )}
+        </div>
         <textarea
           id="job"
           placeholder="Paste the job posting text here..."
