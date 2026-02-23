@@ -1,4 +1,40 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+
+function AnimatedScore({ value, duration = 1200 }) {
+  const [displayValue, setDisplayValue] = useState(0)
+  const startTime = useRef(null)
+  const animationRef = useRef(null)
+
+  useEffect(() => {
+    const target = parseInt(value, 10) || 0
+
+    const animate = (timestamp) => {
+      if (!startTime.current) startTime.current = timestamp
+      const elapsed = timestamp - startTime.current
+      const progress = Math.min(elapsed / duration, 1)
+
+      // Ease out cubic for smooth deceleration
+      const easeOut = 1 - Math.pow(1 - progress, 3)
+      const current = Math.round(easeOut * target)
+
+      setDisplayValue(current)
+
+      if (progress < 1) {
+        animationRef.current = requestAnimationFrame(animate)
+      }
+    }
+
+    animationRef.current = requestAnimationFrame(animate)
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current)
+      }
+    }
+  }, [value, duration])
+
+  return <>{displayValue}</>
+}
 
 export default function ResultsCard({result}){
   if(!result) return null
@@ -6,7 +42,7 @@ export default function ResultsCard({result}){
     <div className="results-card">
       <div className="match-score">
         <div className="score-label">Match Score</div>
-        <div className="score-value">{result.matchScore}/100</div>
+        <div className="score-value"><AnimatedScore value={result.matchScore} />/100</div>
       </div>
 
       {(result.jobLocation || result.compensationInfo) && (

@@ -17,6 +17,16 @@
   --cta: var(--intense-cherry);
   --cta-dark: #8a0018;
 
+  /* Glow colors (derived from palette) */
+  --glow-primary: rgba(197, 34, 51, 0.35);
+  --glow-soft: rgba(197, 34, 51, 0.15);
+  --glow-subtle: rgba(197, 34, 51, 0.08);
+
+  /* Glass effect colors */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-shadow: rgba(116, 18, 29, 0.08);
+
   /* Typography */
   --font-family-system: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --fs-h1: 40px;
@@ -36,8 +46,11 @@
   --dur-fast: 120ms;
   --dur-medium: 360ms;
   --dur-long: 700ms;
+  --dur-slow: 1200ms;
   --stagger: 80ms;
 
   /* Subtle radii */
   --radius-sm: 4px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
 }
