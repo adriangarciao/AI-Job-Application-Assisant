@@ -4,6 +4,7 @@ import Header from './components/Header'
 import FormCard from './components/FormCard'
 import ResultsCard from './components/ResultsCard'
 import HowToUse from './components/HowToUse'
+import { demoResume, demoJobPosting } from './data/demoData'
 
 function App() {
   const [resumeText, setResumeText] = useState('')
@@ -12,6 +13,13 @@ function App() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [result, setResult] = useState(null)
+
+  const handleDemo = () => {
+    setResumeText(demoResume)
+    setJobPostingText(demoJobPosting)
+    setError('')
+    setResult(null)
+  }
 
   const handleAnalyze = async () => {
     setError('')
@@ -81,6 +89,7 @@ function App() {
           includeCoverLetter={includeCoverLetter}
           setIncludeCoverLetter={setIncludeCoverLetter}
           handleAnalyze={handleAnalyze}
+          handleDemo={handleDemo}
           loading={loading}
           error={error}
         />

@@ -338,11 +338,47 @@ body[data-loaded="true"] .title-underline{
 }
 
 /* ==========================================
+   Form Actions (Demo + Analyze row)
+   ========================================== */
+.form-actions{
+  display:flex;
+  gap:12px;
+  margin-top:16px;
+}
+
+.demo-button{
+  padding:16px 24px;
+  border:2px solid var(--intense-cherry);
+  background:transparent;
+  color:var(--intense-cherry) !important;
+  font-weight:700;
+  font-size:16px;
+  border-radius:var(--radius-sm);
+  cursor:pointer;
+  white-space:nowrap;
+  transition:
+    background var(--dur-fast) ease,
+    color var(--dur-fast) ease,
+    transform var(--dur-fast) ease;
+}
+
+.demo-button:hover:not(:disabled){
+  background:var(--intense-cherry);
+  color:#fff !important;
+  transform:translateY(-2px);
+}
+
+.demo-button:disabled{
+  opacity:0.5;
+  cursor:not-allowed;
+}
+
+/* ==========================================
    Analyze Button
    ========================================== */
 .analyze-button{
   display:block;
-  width:100%;
+  flex:1;
   padding:16px 24px;
   border:0;
   background:linear-gradient(135deg, var(--intense-cherry) 0%, var(--burgundy) 100%);

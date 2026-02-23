@@ -9,6 +9,7 @@ export default function FormCard({
   includeCoverLetter,
   setIncludeCoverLetter,
   handleAnalyze,
+  handleDemo,
   loading,
   error,
 }){
@@ -148,7 +149,10 @@ export default function FormCard({
 
       {error && <div className="error-message">{error}</div>}
 
-      <div style={{marginTop:16}}>
+      <div className="form-actions">
+        <button className="demo-button" onClick={handleDemo} disabled={loading}>
+          Try Demo
+        </button>
         <button className="analyze-button" onClick={handleAnalyze} disabled={loading}>
           {loading ? 'Analyzing...' : 'Analyze'}
         </button>
