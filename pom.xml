@@ -186,4 +186,20 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>production</id>
+			<!-- Activated by Railway's Nixpacks build via -Pproduction flag.
+			     Excludes devtools from the production JAR. -->
+			<dependencies>
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-devtools</artifactId>
+					<scope>provided</scope>
+					<optional>true</optional>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+
 </project>
