@@ -80,10 +80,12 @@ public class UserService {
 
     // ---------- Reads ----------
 
+    @Transactional(readOnly = true)
     public UserDTO getUserById(Long id) {
         return userMapper.toDto(getOr404(id));
     }
 
+    @Transactional(readOnly = true)
     public List<UserDTO> getAllUsers() {
         return userRepository.findAll().stream().map(userMapper::toDto).toList();
     }
