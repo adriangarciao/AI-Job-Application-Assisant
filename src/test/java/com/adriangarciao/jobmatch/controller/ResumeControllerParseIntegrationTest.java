@@ -50,7 +50,7 @@ public class ResumeControllerParseIntegrationTest {
     }
 
     @Test
-    void parseWithoutAuth_returnsForbidden() throws Exception {
+    void parseWithoutAuth_returnsUnauthorizedWithJsonBody() throws Exception {
         // create a simple DOCX in-memory
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try (XWPFDocument doc = new XWPFDocument()) {
@@ -62,7 +62,10 @@ public class ResumeControllerParseIntegrationTest {
 
         MockMultipartFile file = new MockMultipartFile("file", "resume.docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", baos.toByteArray());
 
+        // A missing token now yields 401 (not an empty 403) with a JSON error body.
         mvc.perform(multipart("/api/resumes/parse").file(file).contentType(MediaType.MULTIPART_FORM_DATA))
-                .andExpect(status().isForbidden());
+                .andExpect(status().isUnauthorized())
+                .andExpect(jsonPath("$.status", is(401)))
+                .andExpect(jsonPath("$.error", is("Unauthorized")));
     }
 }

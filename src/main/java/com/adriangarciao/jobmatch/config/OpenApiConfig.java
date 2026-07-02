@@ -40,12 +40,32 @@ public class OpenApiConfig {
     @Value("${app.openapi.prod-url:}")
     private String prodUrl;
 
+    /**
+     * When true, the production server is listed first so Swagger UI selects it by
+     * default. Set OPENAPI_PROD_SERVER_FIRST=true on Railway; stays false locally so
+     * localhost remains the default for development.
+     */
+    @Value("${app.openapi.prod-server-first:false}")
+    private boolean prodServerFirst;
+
     @Bean
     public OpenAPI jobMatchOpenAPI() {
+        // Swagger UI defaults to the FIRST server in the list. In production we want
+        // the https Railway URL first; in local dev we want localhost first.
+        Server local = new Server().url(localUrl).description("Local development");
+        Server prod = StringUtils.hasText(prodUrl)
+                ? new Server().url(prodUrl).description("Production (Railway)")
+                : null;
+
         List<Server> servers = new ArrayList<>();
-        servers.add(new Server().url(localUrl).description("Local development"));
-        if (StringUtils.hasText(prodUrl)) {
-            servers.add(new Server().url(prodUrl).description("Production (Railway)"));
+        if (prodServerFirst && prod != null) {
+            servers.add(prod);
+            servers.add(local);
+        } else {
+            servers.add(local);
+            if (prod != null) {
+                servers.add(prod);
+            }
         }
 
         SecurityScheme bearer = new SecurityScheme()
@@ -60,11 +80,23 @@ public class OpenApiConfig {
                         .version("v1")
                         .description("""
                                 JobMatch scores how well a resume matches a job posting using a \
-                                deterministic, weighted skill- and text-overlap engine (no external LLM). \
-                                The analysis endpoint and auth routes are public; resume, application, and \
-                                user endpoints require a JWT. To test a protected route: call \
-                                /api/auth/register or /api/auth/login, copy the returned access token, click \
-                                Authorize, paste it, then try the endpoint.""")
+                                deterministic, weighted skill- and text-overlap engine (no external LLM).
+
+                                **The public web demo uses a single endpoint** (`POST /api/ai/analyze`). \
+                                Everything else here is a fully built and tested backend \
+                                (authentication, resume storage, application tracking) that is \
+                                intentionally not surfaced in the demo UI but is fully testable on this \
+                                page via **Authorize**.
+
+                                **To test a protected route:**
+                                1. Call `POST /api/auth/register` (or `POST /api/auth/login` with the \
+                                   seeded demo account) and copy the returned `token`.
+                                2. Click **Authorize** (top right), paste the raw token — the `Bearer ` \
+                                   prefix is added for you — and confirm the lock closes.
+                                3. Call a protected endpoint (e.g. `GET /api/resumes` or `GET /api/me`).
+
+                                A **demo account** is seeded on the deployed server; its credentials are \
+                                documented in the project README (`How to test the API`).""")
                         .contact(new Contact()
                                 .name("Adrian Garcia")
                                 .url("https://github.com/adriangarciao"))

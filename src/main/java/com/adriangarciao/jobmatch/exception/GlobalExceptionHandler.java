@@ -89,6 +89,18 @@ public class GlobalExceptionHandler {
         return new ApiError(403, "Forbidden", ex.getMessage(), Instant.now());
     }
 
+    // Method-level @PreAuthorize denials (e.g. a USER hitting an ADMIN route) surface
+    // here as AccessDeniedException. Return 403 JSON rather than letting the generic
+    // handler below turn it into a 500. URL-level denials are handled by
+    // RestAccessDeniedHandler in the security filter chain with the same 403 semantics.
+    @ExceptionHandler(org.springframework.security.access.AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ApiError handleAccessDenied(org.springframework.security.access.AccessDeniedException ex) {
+        return new ApiError(403, "Forbidden",
+                "Access denied. Your account does not have the required role for this resource.",
+                Instant.now());
+    }
+
     // --- generic ResponseStatusException passthrough ---
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<ApiError> handleRse(ResponseStatusException ex) {

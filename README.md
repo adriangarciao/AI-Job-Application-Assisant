@@ -97,10 +97,29 @@ The datasource reads `PGHOST`, `PGPORT`, `PGDATABASE`, `PGUSER`, `PGPASSWORD` (d
 cd frontend && npm install && npm run dev
 ```
 
-**Tests.** 85 unit + integration tests against in-memory H2, run on every push/PR via GitHub Actions. JaCoCo writes coverage to `target/site/jacoco/index.html`:
+**Tests.** 93 unit + integration tests against in-memory H2, run on every push/PR via GitHub Actions. JaCoCo writes coverage to `target/site/jacoco/index.html`:
 ```bash
 ./mvnw clean test             # Windows: .\mvnw.cmd clean test
 ```
+
+## How to test the API
+
+The public web demo uses only `POST /api/ai/analyze`. Every other endpoint is a fully built, tested backend (auth, resume storage, application tracking) that you can exercise directly in the [Swagger UI](https://job-match.up.railway.app/swagger-ui.html):
+
+1. **Get a token.** Either `POST /api/auth/register` with a new email/password, or `POST /api/auth/login` with the seeded demo account below. Copy the `token` from the response.
+2. **Authorize.** Click **Authorize** (top right), paste the raw token (no `Bearer ` prefix — Swagger adds it), and confirm the lock closes.
+3. **Call a protected route,** e.g. `GET /api/me`, `GET /api/resumes`, or `GET /api/applications/me/paged`. The demo account ships with one sample resume and one sample application so lists come back non-empty.
+
+Behavior to expect: a protected call with **no token returns `401`** with a JSON body; a valid token calling an **admin-only route (e.g. `GET /api/admin/ping`) returns `403`** with a JSON body.
+
+**Demo account** (credentials are set as environment variables on the server, not committed):
+
+| Field | Value |
+| --- | --- |
+| Email | `demo@jobmatch.dev` |
+| Password | `demopassword123` |
+
+> On the deployed server these are provided via the `DEMO_USER_EMAIL` and `DEMO_USER_PASSWORD` environment variables; the demo user is seeded automatically on startup with a normal (non-admin) role. The credentials are intentionally low-value and shared publicly for demo access only.
 
 ## API Reference
 
